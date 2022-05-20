@@ -1,7 +1,5 @@
 apply plugin: 'maven-publish'
 
-def pom_artifact_id = project.getName()
-
 afterEvaluate {
     publishing {
         Properties properties = new Properties()
@@ -24,18 +22,22 @@ afterEvaluate {
 
         publications {
             release(MavenPublication) {
+                from components.release
                 groupId = GROUP_ID
                 artifactId = ARTIFACT_ID
                 version = VERSION
                 description = DESC
-                artifact("$buildDir/outputs/aar/${pom_artifact_id}-debug.aar")
             }
             snapshot(MavenPublication) {
+                from components.release
                 groupId = GROUP_ID
                 artifactId = ARTIFACT_ID + "-SNAPSHOT"
                 version = VERSION
                 description = DESC
-                artifact("$buildDir/outputs/aar/${pom_artifact_id}-debug.aar")
+            }
+            task sourceJar(type: Jar) {
+                from android.sourceSets.main.java.getSrcDirs()
+                archiveClassifier = "sources"
             }
         }
 
@@ -50,5 +52,3 @@ afterEvaluate {
         }
     }
 }
-
-//authentication(userName: USERNAME, password: PASSWORD)

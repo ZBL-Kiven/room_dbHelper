@@ -6,6 +6,6 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "msgEntity")
 class MsgEntity {
 
-    @PrimaryKey val id: Int = 0
+    @PrimaryKey var id: Int = 0
 
 }
