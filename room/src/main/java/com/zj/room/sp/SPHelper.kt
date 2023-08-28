@@ -16,7 +16,7 @@ internal object SPHelper {
         Preference.clear()
     }
 
-    fun init(name: String, context: Context?) {
-        Preference.init(name, context!!)
+    fun init(name: String, context: Context) {
+        Preference.init(name, context)
     }
 }
